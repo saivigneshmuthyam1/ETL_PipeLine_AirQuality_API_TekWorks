@@ -1,0 +1,64 @@
+Urban Air Quality Monitoring – Multi-City ETL Pipeline
+A government environmental agency wants to build an automated analytics system that monitors air quality across multiple Indian cities. The agency provides an open, unauthenticated API (no token required) that returns Air Quality Index (AQI) and pollutant information.
+You are required to build a complete ETL pipeline (Extract → Transform → Load → Analyze) using Python and Supabase.
+🟦 1️⃣ Extract (extract.py)
+Use the following public API:
+API Endpoint (No Token Needed):
+OpenAQ API (Public Open Data):
+https://api.openaq.org/v2/latest
+Your task
+Write code that:
+Fetches AQI readings for 5 cities:
+Delhi, Bengaluru, Hyderabad, Mumbai, Kolkata
+For each city, call the API with a query like:
+Save each API response separately inside:
+Implement:
+Retry logic (3 attempts)
+Graceful failure handling
+Logging of errors and empty responses
+Return list of all saved file paths.
+data/raw/cityname_raw_timestamp.json
+https://api.openaq.org/v2/latest?city=D
+
+
+
+Here are the working v3 endpoints you can use immediately:
+1) Get latest measurements (recommended for ETL)
+https://api.openaq.org/v3/latest
+2) Filter by city
+https://api.openaq.org/v3/latest?city=Delhi
+3) Filter by country + multiple cities
+https://api.openaq.org/v3/latest?country=IN&city=Delhi&city=Hyderabad
+4) Get list of cities (optional)
+https://api.openaq.org/v3/cities
+ 
+https://air-quality-api.open-meteo.com/v1/air-quality?latitude=17.3850&longitude=78.4867&hourly=pm10,pm2_5,carbon_monoxide,nitrogen_dioxide,ozone,sulphur_dioxide
+
+ 
+A global environmental analytics company, AtmosTrack, wants to build an automated Air Quality Monitoring system that collects hourly pollutant readings for major Indian metro cities. The company wants to analyze pollution trends, assess risk levels, and generate daily reports for internal dashboards.
+AtmosTrack has chosen the Open-Meteo Air Quality API, which is free and does not require tokens.
+You are required to build a complete ETL Pipeline (Extract → Transform → Load → Analyze) using Python.
+ 
+1️⃣ Extract (extract.py)
+Use the following API endpoint:
+https://air-quality-api.open-meteo.com/v1/air-quality
+    ?latitude=<lat>
+    &longitude=<lon>
+    &hourly=pm10,pm2_5,carbon_monoxide,nitrogen_dioxide,ozone,sulphur_dioxide,uv_index
+Cities to fetch (with coordinates):
+City	Latitude	Longitude
+Delhi	28.7041	77.1025
+Mumbai	19.0760	72.8777
+Bengaluru	12.9716	77.5946
+Hyderabad	17.3850	78.4867
+Kolkata	22.5726	88.3639
+Extraction Requirements
+Fetch hourly pollutant data for all 5 cities.
+Each API call must save raw JSON into:
+Implement:
+Retry logic (3 attempts)
+Graceful failure handling
+Logging of API errors
+Return a list of all saved file paths.
+data/raw/<city>_raw_<timestamp>.json
+ 
